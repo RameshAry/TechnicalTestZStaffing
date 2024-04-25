@@ -2,7 +2,7 @@
 git clone https://github.com/RameshAry/TechnicalTestZStaffing.git
 
 Navigate to the project directory:
-cd problem60.js
+cd TechnicalTestZStaffing
 
 Make sure you have Node.js installed on your machine. You can download it from https://nodejs.org/.
 
