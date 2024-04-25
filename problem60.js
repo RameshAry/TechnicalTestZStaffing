@@ -1,3 +1,9 @@
+/*
+Problem 60: Prime Pair Sets >>>>> https://projecteuler.net/problem=60
+
+Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
+*/
+
 // Memoization function to cache function results
 const memoize = (fn) => {
   // Initialize an empty cache object
@@ -24,18 +30,23 @@ const memoize = (fn) => {
 };
 
 const isPrime = memoize((num) => {
-  // Check if the number is less than or equal to 1, or if the number is greater than 2 and divisible by 2 (even number)
-  // In such cases, return false as the number cannot be prime
+  /* 
+  Check if the number is less than or equal to 1, or if the number is greater than 2 and divisible by 2 (even number)
+  In such cases, return false as the number cannot be prime 
+  */
 
   if (num <= 1 || (num > 2 && num % 2 === 0)) return false;
 
-  // After handling divisibility by 2 and 3, the code optimizes the prime check further by only checking divisibility by odd numbers up to the square root of the number.
-  // This optimization is based on the fact that if a number n is not divisible by any prime number up to its square root, then n itself must be prime.
-  // By only checking odd numbers as potential divisors (starting from 5), the code skips checking even numbers (except 2) because even numbers other than 2 cannot be prime.
+  /*
+   After handling divisibility by 2 and 3, the code optimizes the prime check further by only checking divisibility by odd numbers up to the square root of the number.
+  This optimization is based on the fact that if a number n is not divisible by any prime number up to its square root, then n itself must be prime.
+  By only checking odd numbers as potential divisors (starting from 5), the code skips checking even numbers (except 2) because even numbers other than 2 cannot be prime.
+  */
+
   const sqrtNum = Math.ceil(Math.sqrt(num));
 
   // Check divisibility by odd numbers up to square root of num
-  for (let i = 5; i <= sqrtNum; i += 2) {
+  for (let i = 3; i <= sqrtNum; i += 2) {
     if (num % i === 0) return false;
   }
   return true;
@@ -66,9 +77,10 @@ const concatToPrime = memoize((a, b) => {
 
 // Find all combinations of n elements in a list where every two elements concatenate to a prime
 function findCombinations(n, list, acc = []) {
-  // we can skip below two lines because we know we have five numbers
-  // keeping it here just for general scenarios
-
+  /*
+  we can skip below two lines because we know we have five numbers
+  keeping it here just for general scenarios
+  */
   // Check if n is 0, indicating an empty combination, return an empty array
   if (n === 0) return [[]];
 
@@ -96,9 +108,10 @@ function findCombinations(n, list, acc = []) {
   return results;
 }
 
+const startMin = performance.now(); // Measure start time
+
 // Define the maximum value up to which we want to generate prime numbers
 const max = 10000;
-const startMin = performance.now(); // Measure start time
 const primes = generatePrimes(max);
 
 // Define the set of numbers to generate prime numbers
@@ -106,6 +119,14 @@ const numberOfCombinations = 5;
 
 // Find combinations and calculate the sum of each combination
 const combinations = findCombinations(parseInt(numberOfCombinations), primes);
+
+if (combinations.length === 0) {
+  console.log(
+    "No prime number combinations found. Please increase the maximum number of combinations."
+  );
+  return;
+}
+
 const sums = combinations.map((comb) =>
   comb.reduce((acc, curr) => acc + curr, 0)
 );

@@ -1,0 +1,19 @@
+# Clone the repository to your local machine:
+git clone https://github.com/RameshAry/TechnicalTestZStaffing.git
+
+Navigate to the project directory:
+cd problem60.js
+
+Make sure you have Node.js installed on your machine. You can download it from https://nodejs.org/.
+
+Open the index.js file in a text editor.
+
+In the index.js file, update the max variable to set the maximum value up to which you want to generate prime numbers.
+
+Save the changes.
+
+Open your terminal or command prompt and navigate to the project directory.
+
+Run the program using the following command:
+```bash
+node index.js
